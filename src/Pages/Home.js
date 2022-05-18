@@ -4,8 +4,8 @@ import { Button } from 'react-bootstrap';
 
 const Home = () => {
     return (
-        <div>
-            <Button type="primary">Home</Button>
+        <div className="text-center">
+            <p>Hello There, This is a note Taking Website Please Login to use all of the features thank you from Abdur Rahman Talha</p>
         </div>
     );
 };
