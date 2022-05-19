@@ -13,7 +13,8 @@ const MakeTodo = () => {
         const todo = {
             todoName: data.todoName,
             email: data.email,
-            desc: data.desc
+            desc: data.desc,
+            complete: false
         }
         console.log(todo)
         fetch("https://safe-castle-97148.herokuapp.com/todo", {

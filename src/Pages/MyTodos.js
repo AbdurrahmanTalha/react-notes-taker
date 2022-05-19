@@ -47,6 +47,25 @@ const MyTodos = () => {
                 }
             })
     }
+    const handleComplete = (_id) => {
+
+        const updatedComplete = { complete: true };
+        const url = `https://safe-castle-97148.herokuapp.com/complete/${_id}`;
+
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`
+            },
+            body: JSON.stringify(updatedComplete)
+        })
+            .then(res => res.json())
+            .then(data => {
+                toast.success("Successfully Completed")
+                console.log('success', data);
+            })
+    }
     return (
         <div className="ms-0 me-auto" >
             <h2 className="text-center">Your Have {todos.length} Todos to finish</h2>
@@ -56,11 +75,14 @@ const MyTodos = () => {
                         <div key={todo._id} className="col-md-3 ">
                             <Card className="d-flex justify-content-center text-center">
                                 <Card.Body>
-                                    <Card.Title>{todo?.todoName}</Card.Title>
+                                    {
+                                        todo.complete ? <Card.Title className="text-decoration-line-through">{todo?.todoName}</Card.Title> : <Card.Title >{todo?.todoName}</Card.Title>
+                                    }
                                     <Card.Text>
                                         {todo?.desc}
                                     </Card.Text>
                                     <Card.Link className="btn btn-danger text-center" onClick={() => handleDelete(todo?._id)}>Delete</Card.Link>
+                                    <Card.Link className="btn btn-success text-center" onClick={() => handleComplete(todo?._id)}>Complete</Card.Link>
                                 </Card.Body>
                             </Card>
                         </div>)
